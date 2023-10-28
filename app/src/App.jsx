@@ -4,11 +4,22 @@ import viteLogo from '/vite.svg'
 import History from './routes/history/History'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './routes/home/Home'
+import Login from './routes/login/login';
 import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
   const [loggedIn, setLoggedIn] = useState(true)
+  const [userInfo, setUserInfo] = useState(
+    {
+      username: "",
+      firstName: "",
+      lastName: "",
+      email: "",
+      phoneNumber: "",
+      userId: -1
+    }
+  )
 
 
   return (
@@ -37,6 +48,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home loggedIn={loggedIn} />}/>
           <Route path="/history/" element={<History loggedIn={loggedIn}/>}/>
+          <Route path="/login/" element={<Login loggedIn={loggedIn}/>}/>
         </Routes>
       </BrowserRouter>
     </>
