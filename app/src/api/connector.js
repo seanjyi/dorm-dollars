@@ -41,3 +41,5 @@ async function authenticate(data, setLoggedIn, userData, setUserData) {
         console.error('Error:', error)
     }
 }
+
+export default authenticate;
