@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import History from './routes/history/History'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './routes/home/Home'
 import './App.css'
 
 function App() {
@@ -34,7 +35,7 @@ function App() {
       </p> */}
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<p>Home</p>}/>
+          <Route path="/" element={<Home loggedIn={loggedIn} />}/>
           <Route path="/history/" element={<History loggedIn={loggedIn}/>}/>
         </Routes>
       </BrowserRouter>
