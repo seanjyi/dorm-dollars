@@ -9,15 +9,15 @@ Dorm-Dollars is our idea to make a college/beginner friendly budget planner that
 
 ## Planning
 
-Basic application architecture:
-![app architecture](/media/app_architecture.png)
+Basic application architecture:  
+<img src="/media/app_architecture.png" width="500">
 
-Basic wireframe structure for our application:
-![wireframe structure](/media/wireframe_struct.png)
-![login](/media/login.png)
-![dashboard](/media/dashboard.jpg)
-![history](/media/history.png)
+Basic wireframe structure for our application:   
+<img src="/media/wireframe_struct.png" width="500">  
+<img src="/media/login.png" width="500">  
+<img src="/media/dashboard.jpg" width="500">  
+<img src="/media/history.png" width="500">  
 
-PostgreSQL database, which we plan to be hosted on Google Cloud:
-![sql structure](/media/sql_struct.png)
+PostgreSQL database, which we plan to be hosted on Google Cloud  
+<img src="/media/sql_struct.png" width="500">  
 
