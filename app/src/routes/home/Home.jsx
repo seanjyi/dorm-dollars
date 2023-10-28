@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
+import { Navigate } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 
-const Home = () => {
+const Home = (props) => {
 
-    // if (!props.loggedIn) {
-    //     return <Navigate to="/login" />
-    // }
+    if (!props.loggedIn) {
+        return <Navigate to="/login" />
+    }
 
     return (
-        <p>Hello World</p>
+        <p>{JSON.stringify(props.userData)}</p>
     )
 }
 

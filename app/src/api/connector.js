@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const apiPath = 'http://localhost:5000/'
+const apiPath = 'http://localhost:5000'
 const headers = {
     headers: {
         'Content-Type': 'application/json'
@@ -29,12 +29,12 @@ async function authenticate(data, setLoggedIn, userData, setUserData) {
         setLoggedIn(true);
         setUserData({
             ...userData,
-            username: response.username,
-            firstName: response.firstName,
-            lastName: response.lastName,
-            email: response.email,
-            phoneNumber: response.phoneNumber,
-            userId: response.userId
+            username: response.data.username,
+            firstName: response.data.first_name,
+            lastName: response.data.last_name,
+            email: response.data.email,
+            phoneNumber: response.data.phone_number,
+            userId: response.data.userid
         })
 
     } catch (error) {

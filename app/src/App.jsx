@@ -4,13 +4,14 @@ import viteLogo from '/vite.svg'
 import History from './routes/history/History'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './routes/home/Home'
-// import Login from './routes/login/login';
+import Login from './routes/login/Login';
+import authenticate from './api/connector';
 import './App.css'
 import Navbar from './components/Navbar';
 
 function App() {
   const [count, setCount] = useState(0)
-  const [loggedIn, setLoggedIn] = useState(true)
+  const [loggedIn, setLoggedIn] = useState(false)
   const [userData, setUserData] = useState(
     {
       username: "",
@@ -48,9 +49,9 @@ function App() {
       <BrowserRouter>
         {loggedIn && <Navbar/>}
         <Routes>
-          <Route path="/" element={<Home loggedIn={loggedIn} />}/>
+          <Route path="/" element={<Home loggedIn={loggedIn} userData={userData} />}/>
           <Route path="/history/" element={<History loggedIn={loggedIn} userData={userData}/>}/>
-          {/* <Route path="/login/" 
+          <Route path="/login/" 
             element={
               <Login
                 loggedIn={loggedIn}
@@ -59,7 +60,7 @@ function App() {
                 setUserData={setUserData}
               />
             }
-          /> */}
+          />
         </Routes>
       </BrowserRouter>
     </>
