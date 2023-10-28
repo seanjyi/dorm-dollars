@@ -1,19 +1,16 @@
 import React, { Component } from 'react'
-import AppBar from '@mui/material/AppBar';
-import Typography from '@mui/material/Typography';
+import Navbar from '../../components/Navbar';
 
 const Home = () => {
 
-    if (!props.loggedIn) {
-        return <Navigate to="/login" />
-    }
+    // if (!props.loggedIn) {
+    //     return <Navigate to="/login" />
+    // }
 
     return (
-        <AppBar>
-            <Typography variant="h6" >
-                Dorm Dollars
-            </Typography>
-        </AppBar>
+        <>
+            <Navbar />
+        </>
     )
 }
 
