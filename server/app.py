@@ -1,4 +1,5 @@
 from flask import Flask, request, render_template
+from flask_cors import CORS
 import psycopg2
 from psycopg2 import extras
 import os
@@ -18,6 +19,8 @@ conn = psycopg2.connect(
 cur = conn.cursor(cursor_factory=extras.RealDictCursor)
 
 app = Flask(__name__)
+
+CORS(app, resources={r"*": {"origins": "http://localhost:5173"}})
 
 @app.route("/", methods=["GET", "POST"])
 def hello_world():
