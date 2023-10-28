@@ -32,9 +32,16 @@ def login():
     if request.method == "POST":
         data = request.get_json()
         username = data['username']
-        q = f"SELECT * from person where name = '{username}'"
-        cur.execute(q)
-        return [row for row in cur.fetchall()]
+        password = data['password']
+        q = f"SELECT * from users where username = %s and password = %s"
+        cur.execute(q, (username, password))
+        user = cur.fetchone()
+        if not user:
+            return {
+                "Status": 500,
+                "Error": "Invalid credentials."
+            }, 500
+        return user
 
 
 
