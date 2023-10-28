@@ -10,7 +10,7 @@ import './App.css'
 function App() {
   const [count, setCount] = useState(0)
   const [loggedIn, setLoggedIn] = useState(true)
-  const [userInfo, setUserInfo] = useState(
+  const [userData, setUserData] = useState(
     {
       username: "",
       firstName: "",
@@ -47,8 +47,17 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home loggedIn={loggedIn} />}/>
-          <Route path="/history/" element={<History loggedIn={loggedIn}/>}/>
-          <Route path="/login/" element={<Login loggedIn={loggedIn}/>}/>
+          <Route path="/history/" element={<History loggedIn={loggedIn} userData={userData}/>}/>
+          <Route path="/login/" 
+            element={
+              <Login
+                loggedIn={loggedIn}
+                setLoggedIn={setLoggedIn}
+                userData={userData}
+                setUserData={setUserData}
+              />
+            }
+          />
         </Routes>
       </BrowserRouter>
     </>
