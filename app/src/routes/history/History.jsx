@@ -1,9 +1,15 @@
 import React, { Component } from 'react'
+import { Navigate } from 'react-router-dom'
 
-const History = () => {
+const History = (props) => {
+
+    if (!props.loggedIn) {
+        return <Navigate to="/login" />
+    }
+
     return (
         <>
-            <p>Hello World</p>
+            <p>History</p>
         </>
     )
 }
