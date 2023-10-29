@@ -57,7 +57,7 @@ const Login = (props) => {
                     />
 
                     <br /><br />
-                    <button type="submit">Submit</button>
+                    <button type="submit" style={{color: "white", backgroundColor: "gray"}}>Submit</button>
                 </form>
             </div>
         </div>

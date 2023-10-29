@@ -1,9 +1,11 @@
-import React, { Component, useState } from 'react'
+import React, { Component, useState, useEffect } from 'react'
 import { Navigate } from 'react-router-dom'
 import { Button, Box, Modal, Typography, InputLabel, MenuItem, FormControl, Select, OutlinedInput, InputAdornment } from '@mui/material';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import { CATEGORIES, MOP } from '../../components/constants';
 import TransactionTable from '../../components/transactionTable';
@@ -17,6 +19,17 @@ const History = (props) => {
     if (!props.loggedIn) {
         return <Navigate to="/login" />
     }
+
+    const [loading, setLoading] = useState(false)
+
+    useEffect(() => {
+        setRows(transactions)
+        setOpenAdd(false)
+        setLoading(false)
+        transactions.sort(function(a, b) {
+            return new Date(b.date) - new Date(a.date);
+        })
+    }, [transactions])
 
     // Add modal vars: date, cat, amo, mop
     // Filter modal vars: fCat, startDate, endDate
@@ -108,11 +121,18 @@ const History = (props) => {
             'start_date': "",
             'end_date': ""
         }
+        setLoading(true)
         fetchTransactions(data, props.setTransactions)
     }
 
     return (
         <>
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={loading}
+            >
+                <CircularProgress color="inherit" />
+            </Backdrop>
             <Box sx={{ display: 'flex', justifyContent: 'flex-end', my: 4 }}> 
                 <Button variant="contained" onClick={handleOpenAdd}>
                     Add

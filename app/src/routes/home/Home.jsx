@@ -18,6 +18,7 @@ const Home = (props) => {
     )
 
     useEffect(() => {
+        
         const totalSpent = transactions.reduce((total, curr) => curr.amount < 0 ? total - curr.amount : total, 0)
         const dataPoints = CATEGORIES.map(category => {
             return {
@@ -62,10 +63,6 @@ const Home = (props) => {
         return <Navigate to="/login" />
     }
 
-    transactions.sort(function(a, b) {
-        return new Date(b.date) - new Date(a.date);
-    })
-
     return (
         <>
             <h1>Welcome, {props.userData.firstName}</h1>
@@ -77,9 +74,9 @@ const Home = (props) => {
                 })}
             </div>
             <TransactionTable rows={ transactions.slice(0,5) }/>
-            <div id="bar-chart-container" style={{width: "100%", height: "400px", borderRadius: "5px", margin: "30px 0"}} />
+            <div id="bar-chart-container" style={{width: "100%", height: "400px", borderRadius: "5px", margin: "30px 0", paddingTop: "20px", backgroundColor: "white"}} />
             <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
-                <div id="pie-chart-container" style={{width: "100%", height: "400px", borderRadius: "5px", marginBottom: "50px"}} />
+                <div id="pie-chart-container" style={{width: "100%", height: "400px", borderRadius: "5px", marginBottom: "50px", marginTop: "20px", paddingTop: "20px", backgroundColor: "white"}} />
                 {/* <div id="line-chart-container" style={{width: "45%", height: "400px", borderRadius: "5px"}} /> */}
             </div>
         </>
