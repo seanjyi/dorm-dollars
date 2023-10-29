@@ -1,9 +1,11 @@
-from flask import Flask, request, render_template
+import json
+from flask import Flask, jsonify, request, render_template
 from flask_cors import CORS
 import psycopg2
 from psycopg2 import extras
 import os
 from dotenv import load_dotenv
+import datetime
 
 load_dotenv()
 
@@ -30,7 +32,7 @@ def hello_world():
     elif request.method == "POST":
         return {"message":"Hello World!"}
     
-@app.route("/login/", methods=["POST"])
+@app.route("/login", methods=["POST"])
 def login():
     if request.method == "POST":
         data = request.get_json()
@@ -46,6 +48,36 @@ def login():
             }, 500
         return user
 
+@app.route('/transactions', methods=["POST"])
+def get_transactions():
+    if request.method == "POST":
+        params = request.get_json()
+        userid = params['userid']
+        category = params['category']
+        start_date = params['start_date']
+        end_date = params['end_date']
+
+        if category == '' and start_date == '' and end_date == '':
+            cur.execute('SELECT transactionid, userid, "date", category, amount, method_of_payment, repayment '
+                        'FROM public.transactions '
+                        'WHERE userid=%s', userid)
+            response = cur.fetchall()
+
+            ret = {}
+            for line in response:
+                ret[line['transactionid']] = {
+                    'userid': line['userid'],
+                    'date': line['date'].strftime("%Y/%m/%d"),
+                    'category': line['category'],
+                    'amount': float(line['amount']),
+                    'method_of_payment': line['method_of_payment'],
+                    'repayment': line['repayment'],
+                }
+
+            return ret
+        
+
+    return ""
 
 
 if __name__ == "__main__":
