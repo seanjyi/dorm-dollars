@@ -230,6 +230,58 @@ def get_loans():
 
         return jsonify(ret)
 
+@app.route('/add_transaction', methods=['POST'])
+def add_transaction():
+    if request.method == 'POST':
+        params = request.get_json()
+        userid = params['userid']
+        category = params['category']
+        date = params['date']
+        amount = params['amount']
+        m_o_p = params['method_of_payment']
+
+        cur.execute('INSERT INTO public.transactions '
+                    '(userid, "date", category, amount, method_of_payment, repayment) '
+                    'VALUES(%s, %s, %s, %s, %s, %s)',
+                    (userid, date, category, amount, m_o_p, ''))
+        conn.commit()
+        return "Success"
+
+@app.route('/add_loan', methods=['POST'])
+def add_loans():
+    if request.method == 'POST':
+        params = request.get_json()
+        userid = params['userid']
+        loan_name = params['loan_name']
+        amount = params['amount']
+
+        cur.execute('INSERT INTO public.loans '
+                    '(userid, loan_name, amount) '
+                    'VALUES(%s, %s, %s);',
+                    (userid, loan_name, amount))
+        conn.commit()
+        return "Success"
+
+@app.route('/delete_transaction', methods=['POST'])
+def delete_transaction():
+    if request.method == 'POST':
+        transactionid = request.get_json()['transactionid']
+        
+        cur.execute('DELETE FROM public.transactions '
+                    'WHERE transactionid=%s;', transactionid)
+        conn.commit()
+        return "Success"
+    
+@app.route('/delete_loan', methods=['POST'])
+def delete_loan():
+    if request.method == 'POST':
+        loanid = request.get_json()['loanid']
+        
+        cur.execute('DELETE FROM public.loans '
+                    'WHERE loanid=%s;', loanid)
+        conn.commit()
+        return "Success"
+
 
 if __name__ == "__main__":
     app.run(port=5000, debug=True)

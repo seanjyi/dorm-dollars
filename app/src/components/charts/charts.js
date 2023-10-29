@@ -23,3 +23,21 @@ export const renderBarChart = (title, data) => {
       });
       chart.render();
 }
+
+export const renderPieChart = (title, data) => {
+  var chart = new CanvasJS.Chart("pie-chart-container", {
+    animationEnabled: true,
+    title: {
+      text: title,
+      fontFamily: "Roboto, Arial" 
+    },
+    data: [{
+      type: "pie",
+      startAngle: 240,
+      yValueFormatString: "##0.00\"%\"",
+      indexLabel: "{label} {y}",
+      dataPoints: data
+    }]
+  });
+  chart.render();
+}
