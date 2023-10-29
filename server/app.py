@@ -64,7 +64,7 @@ def get_transactions():
                 ret.append({
                     'transactionid': line['transactionid'],
                     'userid': line['userid'],
-                    'date': line['date'].strftime("%Y/%m/%d"),
+                    'date': line['date'].strftime("%Y-%m-%d"),
                     'category': line['category'],
                     'amount': float(line['amount']),
                     'method_of_payment': line['method_of_payment'],
@@ -83,7 +83,7 @@ def get_transactions():
                 ret.append({
                     'transactionid': line['transactionid'],
                     'userid': line['userid'],
-                    'date': line['date'].strftime("%Y/%m/%d"),
+                    'date': line['date'].strftime("%Y-%m-%d"),
                     'category': line['category'],
                     'amount': float(line['amount']),
                     'method_of_payment': line['method_of_payment'],
@@ -102,7 +102,7 @@ def get_transactions():
                 ret.append({
                     'transactionid': line['transactionid'],
                     'userid': line['userid'],
-                    'date': line['date'].strftime("%Y/%m/%d"),
+                    'date': line['date'].strftime("%Y-%m-%d"),
                     'category': line['category'],
                     'amount': float(line['amount']),
                     'method_of_payment': line['method_of_payment'],
@@ -121,7 +121,7 @@ def get_transactions():
                 ret.append({
                     'transactionid': line['transactionid'],
                     'userid': line['userid'],
-                    'date': line['date'].strftime("%Y/%m/%d"),
+                    'date': line['date'].strftime("%Y-%m-%d"),
                     'category': line['category'],
                     'amount': float(line['amount']),
                     'method_of_payment': line['method_of_payment'],
@@ -140,7 +140,7 @@ def get_transactions():
                 ret.append({
                     'transactionid': line['transactionid'],
                     'userid': line['userid'],
-                    'date': line['date'].strftime("%Y/%m/%d"),
+                    'date': line['date'].strftime("%Y-%m-%d"),
                     'category': line['category'],
                     'amount': float(line['amount']),
                     'method_of_payment': line['method_of_payment'],
@@ -160,7 +160,7 @@ def get_transactions():
                 ret.append({
                     'transactionid': line['transactionid'],
                     'userid': line['userid'],
-                    'date': line['date'].strftime("%Y/%m/%d"),
+                    'date': line['date'].strftime("%Y-%m-%d"),
                     'category': line['category'],
                     'amount': float(line['amount']),
                     'method_of_payment': line['method_of_payment'],
@@ -179,7 +179,7 @@ def get_transactions():
                 ret.append({
                     'transactionid': line['transactionid'],
                     'userid': line['userid'],
-                    'date': line['date'].strftime("%Y/%m/%d"),
+                    'date': line['date'].strftime("%Y-%m-%d"),
                     'category': line['category'],
                     'amount': float(line['amount']),
                     'method_of_payment': line['method_of_payment'],
@@ -199,7 +199,7 @@ def get_transactions():
                 ret.append({
                     'transactionid': line['transactionid'],
                     'userid': line['userid'],
-                    'date': line['date'].strftime("%Y/%m/%d"),
+                    'date': line['date'].strftime("%Y-%m-%d"),
                     'category': line['category'],
                     'amount': float(line['amount']),
                     'method_of_payment': line['method_of_payment'],
