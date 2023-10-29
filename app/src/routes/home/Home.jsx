@@ -4,6 +4,7 @@ import DisplayCard from './cards/Card';
 import Navbar from '../../components/Navbar';
 import TransactionTable from '../../components/transactionTable';
 import { renderBarChart } from '../../components/charts/charts';
+import { CATEGORIES } from '../../components/constants';
 
 const Home = (props) => {
 
@@ -17,9 +18,19 @@ const Home = (props) => {
     )
 
     useEffect(() => {
+        const dataPoints = CATEGORIES.map(category => {
+            return {
+                label: category,
+                y: transactions.reduce((total, curr) => curr.category === category ? total + 1 : total, 0)
+            }
+        })
         setMonthlyIncome(transactions.reduce((total, curr) => curr.amount > 0 ? total + curr.amount : total, 0))
         setMonthlyExpenses(transactions.reduce((total, curr) => curr.amount < 0 ? total - curr.amount : total, 0))
-        // renderBarChart("Spending by Category", )
+        try {
+            renderBarChart("Spending by Category", dataPoints)
+        } catch (error) {
+            
+        }
     }, [transactions])
 
 

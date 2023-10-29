@@ -1,4 +1,4 @@
-export default CATEGORIES = [
+export const CATEGORIES = [
     'Groceries',
     'Loan Payment',
     'Housing',
