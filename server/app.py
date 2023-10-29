@@ -1,14 +1,11 @@
-import json
-from flask import Flask, jsonify, request, render_template
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 import psycopg2
 from psycopg2 import extras
 import os
 from dotenv import load_dotenv
-import datetime
 
 load_dotenv()
-
 
 conn = psycopg2.connect(
     database=os.getenv("DB_NAME"),
@@ -21,8 +18,7 @@ conn = psycopg2.connect(
 cur = conn.cursor(cursor_factory=extras.RealDictCursor)
 
 app = Flask(__name__)
-
-CORS(app, resources={r"*": {"origins": "http://localhost:5173"}})
+CORS(app)
 
 @app.route("/", methods=["GET", "POST"])
 def hello_world():
@@ -68,7 +64,7 @@ def get_transactions():
                 ret.append({
                     'transactionid': line['transactionid'],
                     'userid': line['userid'],
-                    'date': line['date'].strftime("%Y/%m/%d"),
+                    'date': line['date'].strftime("%Y-%m-%d"),
                     'category': line['category'],
                     'amount': float(line['amount']),
                     'method_of_payment': line['method_of_payment'],
@@ -87,7 +83,7 @@ def get_transactions():
                 ret.append({
                     'transactionid': line['transactionid'],
                     'userid': line['userid'],
-                    'date': line['date'].strftime("%Y/%m/%d"),
+                    'date': line['date'].strftime("%Y-%m-%d"),
                     'category': line['category'],
                     'amount': float(line['amount']),
                     'method_of_payment': line['method_of_payment'],
@@ -106,7 +102,7 @@ def get_transactions():
                 ret.append({
                     'transactionid': line['transactionid'],
                     'userid': line['userid'],
-                    'date': line['date'].strftime("%Y/%m/%d"),
+                    'date': line['date'].strftime("%Y-%m-%d"),
                     'category': line['category'],
                     'amount': float(line['amount']),
                     'method_of_payment': line['method_of_payment'],
@@ -125,7 +121,7 @@ def get_transactions():
                 ret.append({
                     'transactionid': line['transactionid'],
                     'userid': line['userid'],
-                    'date': line['date'].strftime("%Y/%m/%d"),
+                    'date': line['date'].strftime("%Y-%m-%d"),
                     'category': line['category'],
                     'amount': float(line['amount']),
                     'method_of_payment': line['method_of_payment'],
@@ -144,7 +140,7 @@ def get_transactions():
                 ret.append({
                     'transactionid': line['transactionid'],
                     'userid': line['userid'],
-                    'date': line['date'].strftime("%Y/%m/%d"),
+                    'date': line['date'].strftime("%Y-%m-%d"),
                     'category': line['category'],
                     'amount': float(line['amount']),
                     'method_of_payment': line['method_of_payment'],
@@ -164,7 +160,7 @@ def get_transactions():
                 ret.append({
                     'transactionid': line['transactionid'],
                     'userid': line['userid'],
-                    'date': line['date'].strftime("%Y/%m/%d"),
+                    'date': line['date'].strftime("%Y-%m-%d"),
                     'category': line['category'],
                     'amount': float(line['amount']),
                     'method_of_payment': line['method_of_payment'],
@@ -183,7 +179,7 @@ def get_transactions():
                 ret.append({
                     'transactionid': line['transactionid'],
                     'userid': line['userid'],
-                    'date': line['date'].strftime("%Y/%m/%d"),
+                    'date': line['date'].strftime("%Y-%m-%d"),
                     'category': line['category'],
                     'amount': float(line['amount']),
                     'method_of_payment': line['method_of_payment'],
@@ -203,7 +199,7 @@ def get_transactions():
                 ret.append({
                     'transactionid': line['transactionid'],
                     'userid': line['userid'],
-                    'date': line['date'].strftime("%Y/%m/%d"),
+                    'date': line['date'].strftime("%Y-%m-%d"),
                     'category': line['category'],
                     'amount': float(line['amount']),
                     'method_of_payment': line['method_of_payment'],

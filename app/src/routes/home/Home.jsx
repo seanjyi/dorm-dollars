@@ -61,6 +61,10 @@ const Home = (props) => {
         return <Navigate to="/login" />
     }
 
+    transactions.sort(function(a, b) {
+        return new Date(b.date) - new Date(a.date);
+    })
+
     return (
         <>
             <h1>Welcome, {props.userData.firstName}</h1>
@@ -81,6 +85,8 @@ const Home = (props) => {
             <p>{JSON.stringify(props.userData)}</p>
             <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
                 <div id="bar-chart-container" style={{width: "100%", borderRadius: "5px"}} />
+                <div id="pie-chart-container" style={{width: "100%", borderRadius: "5px"}} />
+                <div id="line-chart-container" style={{width: "100%", borderRadius: "5px"}} />
             </div>
         </>
     )
