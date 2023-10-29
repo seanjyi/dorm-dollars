@@ -22,16 +22,7 @@ function App() {
       userId: -1
     }
   )
-  const [transactions, setTransactions] = useState([
-    {
-      type: "income",
-      amount: 200.00
-    },
-    {
-      type: "expense",
-      amount: 150.00
-    },
-  ])
+  const [transactions, setTransactions] = useState([])
 
   useEffect(() => {
     if (!loggedIn) {
@@ -73,7 +64,7 @@ function App() {
         {loggedIn && <Navbar/>}
         <div style={{maxWidth: "900px", margin: "auto"}}>
           <Routes>
-            <Route path="/" element={<Home loggedIn={loggedIn} userData={userData} transactions={transactions}/>}/>
+            <Route path="/" element={<Home loggedIn={loggedIn} userData={userData} transactions={transactions} setTransactions={setTransactions}/>}/>
             <Route path="/history/" element={<History loggedIn={loggedIn} userData={userData}/>}/>
             <Route path="/login/" 
               element={
