@@ -262,6 +262,26 @@ def add_loans():
         conn.commit()
         return "Success"
 
+@app.route('/delete_transaction', methods=['POST'])
+def delete_transaction():
+    if request.method == 'POST':
+        transactionid = request.get_json()['transactionid']
+        
+        cur.execute('DELETE FROM public.transactions '
+                    'WHERE transactionid=%s;', transactionid)
+        conn.commit()
+        return "Success"
+    
+@app.route('/delete_loan', methods=['POST'])
+def delete_loan():
+    if request.method == 'POST':
+        loanid = request.get_json()['loanid']
+        
+        cur.execute('DELETE FROM public.loans '
+                    'WHERE loanid=%s;', loanid)
+        conn.commit()
+        return "Success"
+
 
 if __name__ == "__main__":
     app.run(port=5000, debug=True)
