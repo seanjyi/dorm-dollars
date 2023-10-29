@@ -1,17 +1,35 @@
-import React, { Component } from 'react'
+import React, { Component, useState, useEffect } from 'react'
 import { Navigate } from 'react-router-dom'
 import { Button, Box, Modal, Typography, InputLabel, MenuItem, FormControl, Select, OutlinedInput, InputAdornment } from '@mui/material';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import { CATEGORIES, MOP } from '../../components/constants';
+import TransactionTable from '../../components/transactionTable';
+import { addTransaction, fetchTransactions } from '../../api/connector';
 
 const History = (props) => {
+
+    const { transactions } = props;
+    const [rows, setRows] = useState(transactions)
 
     if (!props.loggedIn) {
         return <Navigate to="/login" />
     }
+
+    const [loading, setLoading] = useState(false)
+
+    useEffect(() => {
+        setRows(transactions)
+        setOpenAdd(false)
+        setLoading(false)
+        transactions.sort(function(a, b) {
+            return new Date(b.date) - new Date(a.date);
+        })
+    }, [transactions])
 
     // Add modal vars: date, cat, amo, mop
     // Filter modal vars: fCat, startDate, endDate
@@ -80,8 +98,59 @@ const History = (props) => {
         p: 4,
     };
 
+    const handleAddSubmit = (e) => {
+        e.preventDefault();
+        let data = {
+            'userid': props.userData.userId,
+            'amount': amo,
+            // 'date': (date.$d.getYear() + 1900) + '-' + (date.$d.getMonth() + 1) + ,
+            'date': date,
+            'category': cat,
+            'method_of_payment': mop
+        }
+
+        addTransaction(data)
+        setAmo('')
+        setDate('')
+        setCat('')
+        setMop('')
+
+        data = {
+            'userid': "" + props.userData.userId,
+            'category': "",
+            'start_date': "",
+            'end_date': ""
+        }
+        setLoading(true)
+        fetchTransactions(data, props.setTransactions)
+        handleCloseFilter()
+    }
+
+    const handleFilter = (e) => {
+        e.preventDefault()
+        let data = {
+            'userid': "" + props.userData.userId,
+            'category': fCat,
+            'start_date': startDate,
+            'end_date': endDate
+        }
+
+        console.log(data)
+        fetchTransactions(data, props.setTransactions)
+        setFilterCat('')
+        setStartDate('')
+        setEndDate('')
+        handleCloseFilter()
+    }
+
     return (
         <>
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={loading}
+            >
+                <CircularProgress color="inherit" />
+            </Backdrop>
             <Box sx={{ display: 'flex', justifyContent: 'flex-end', my: 4 }}> 
                 <Button variant="contained" onClick={handleOpenAdd}>
                     Add
@@ -91,6 +160,7 @@ const History = (props) => {
                     Filter
                 </Button>
             </Box>
+            <TransactionTable rows={rows}/>
 
             <Modal
                 open={openAdd}
@@ -152,7 +222,7 @@ const History = (props) => {
                     </Box>
 
                     <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 4 }}>
-                        <Button variant="contained">
+                        <Button variant="contained" onClick={handleAddSubmit}>
                             Submit
                         </Button>
                     </Box>
@@ -198,7 +268,7 @@ const History = (props) => {
                     </Box>
 
                     <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 4 }}>
-                        <Button variant="contained">
+                        <Button variant="contained" onClick={handleFilter}>
                             Update
                         </Button>
                     </Box>
