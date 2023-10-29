@@ -28,7 +28,7 @@ Our application has three views:
 
 ### Login
 
-The login page utilizes the **CORS** library to authenticate the user.  
+The login page utilizes **SQL** tables to authenticate the user.  
 
 <img src="https://github.com/seanjyi/dorm-dollars/assets/80228469/58e5ab3d-f6e1-498f-a79a-7f91e92ddb9f" width="800">  
 
