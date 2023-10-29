@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 import { Navigate } from 'react-router-dom'
 import { Button, Box, Modal, Typography, InputLabel, MenuItem, FormControl, Select, OutlinedInput, InputAdornment } from '@mui/material';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -6,8 +6,12 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 import { CATEGORIES, MOP } from '../../components/constants';
+import TransactionTable from '../../components/transactionTable';
 
 const History = (props) => {
+
+    const { transactions } = props;
+    const [rows, setRows] = useState(transactions)
 
     if (!props.loggedIn) {
         return <Navigate to="/login" />
@@ -91,6 +95,7 @@ const History = (props) => {
                     Filter
                 </Button>
             </Box>
+            <TransactionTable rows={rows}/>
 
             <Modal
                 open={openAdd}
