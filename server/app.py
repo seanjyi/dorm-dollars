@@ -58,7 +58,7 @@ def get_transactions():
         end_date = params['end_date']
 
         if category == '' and start_date == '' and end_date == '':
-            cur.execute('SELECT transactionid, userid, "date", category, amount, method_of_payment, repayment '
+            cur.execute('SELECT * '
                         'FROM public.transactions '
                         'WHERE userid=%s', userid)
             response = cur.fetchall()
@@ -77,7 +77,7 @@ def get_transactions():
 
             return jsonify(ret)
         elif category == '' and start_date == '' and len(end_date) > 0:
-            cur.execute('SELECT transactionid, userid, "date", category, amount, method_of_payment, repayment '
+            cur.execute('SELECT * '
                         'FROM public.transactions '
                         'WHERE userid=%s AND date<=%s', (userid, end_date))
             response = cur.fetchall()
@@ -96,7 +96,7 @@ def get_transactions():
 
             return jsonify(ret)
         elif category == '' and len(start_date) > 0 and end_date == '':
-            cur.execute('SELECT transactionid, userid, "date", category, amount, method_of_payment, repayment '
+            cur.execute('SELECT * '
                         'FROM public.transactions '
                         'WHERE userid=%s AND date>=%s', (userid, start_date))
             response = cur.fetchall()
@@ -115,7 +115,7 @@ def get_transactions():
 
             return jsonify(ret)
         elif category == '' and len(start_date) > 0 and len(end_date) > 0:
-            cur.execute('SELECT transactionid, userid, "date", category, amount, method_of_payment, repayment '
+            cur.execute('SELECT * '
                         'FROM public.transactions '
                         'WHERE userid=%s AND date BETWEEN %s AND %s', (userid, start_date, end_date))
             response = cur.fetchall()
@@ -134,7 +134,7 @@ def get_transactions():
 
             return jsonify(ret)
         elif len(category) > 0 and start_date == '' and end_date == '':
-            cur.execute('SELECT transactionid, userid, "date", category, amount, method_of_payment, repayment '
+            cur.execute('SELECT * '
                         'FROM public.transactions '
                         'WHERE userid=%s AND category=%s', (userid, category))
             response = cur.fetchall()
@@ -154,7 +154,7 @@ def get_transactions():
             return jsonify(ret)
         
         elif len(category) > 0 and start_date == '' and len(end_date) > 0:
-            cur.execute('SELECT transactionid, userid, "date", category, amount, method_of_payment, repayment '
+            cur.execute('SELECT * '
                         'FROM public.transactions '
                         'WHERE userid=%s AND category=%s AND date<=%s', (userid, category, end_date))
             response = cur.fetchall()
@@ -173,7 +173,7 @@ def get_transactions():
 
             return jsonify(ret)
         elif len(category) > 0 and len(start_date) > 0 and end_date == '':
-            cur.execute('SELECT transactionid, userid, "date", category, amount, method_of_payment, repayment '
+            cur.execute('SELECT * '
                         'FROM public.transactions '
                         'WHERE userid=%s AND category=%s AND date>=%s', (userid, category, start_date))
             response = cur.fetchall()
@@ -192,7 +192,7 @@ def get_transactions():
 
             return jsonify(ret)
         else:
-            cur.execute('SELECT transactionid, userid, "date", category, amount, method_of_payment, repayment '
+            cur.execute('SELECT * '
                         'FROM public.transactions '
                         'WHERE userid=%s AND category=%s AND date BETWEEN %s AND %s', 
                         (userid, category, start_date, end_date))
@@ -211,6 +211,28 @@ def get_transactions():
                 })
 
             return jsonify(ret)
+        
+@app.route('/loans', methods=["POST"])
+def get_loans():
+    if request.method == "POST":
+        params = request.get_json()
+        userid = params['userid']
+
+        cur.execute('SELECT * '
+                    'FROM public.loans '
+                    'WHERE userid=%s', userid)
+        response = cur.fetchall()
+        
+        ret = []
+        for line in response:
+            ret.append({
+                'loanid': line['loanid'],
+                'userid': line['userid'],
+                'loan_name': line['loan_name'],
+                'amount': float(line['amount']),
+            })
+
+        return jsonify(ret)
 
 
 if __name__ == "__main__":
