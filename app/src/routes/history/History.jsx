@@ -18,10 +18,22 @@ const History = (props) => {
     const handleOpenAdd = () => setOpenAdd(true);
     const handleCloseAdd = () => setOpenAdd(false);
 
+    // var for date
+    const [date, setDate] = React.useState('');
+    const handleDate = (value) => {
+        setDate(value);
+    }   
+
     // var for category
     const [cat, setCat] = React.useState('');
     const handleCat = (event) => {
         setCat(event.target.value);
+    };
+
+    // var for amount
+    const [amo, setAmo] = React.useState('');
+    const handleAmo = (event) => {
+        setAmo(event.target.value);
     };
 
     // var for mop
@@ -34,6 +46,24 @@ const History = (props) => {
     const [openFilter, setOpenFilter] = React.useState(false);
     const handleOpenFilter = () => setOpenFilter(true);
     const handleCloseFilter = () => setOpenFilter(false);
+
+    // var for start date
+    const [startDate, setStartDate] = React.useState('');
+    const filterStartDate = (value) => {
+        setStartDate(value);
+    }   
+
+    // var for end date
+    const [endDate, setEndDate] = React.useState('');
+    const filterEndDate = (value) => {
+        setEndDate(value);
+    }   
+
+    // var for category
+    const [fCat, setFilterCat] = React.useState('');
+    const filterCat = (event) => {
+        setFilterCat(event.target.value);
+    };
 
     const style = {
         position: 'absolute',
@@ -54,7 +84,7 @@ const History = (props) => {
                     Add
                 </Button>
 
-                <Button variant="contained" sx={{ ml: 2 }}>
+                <Button variant="contained" onClick={handleOpenFilter} sx={{ ml: 2 }}>
                     Filter
                 </Button>
             </Box>
@@ -74,18 +104,14 @@ const History = (props) => {
                         gridTemplateColumns: 'repeat(2, 1fr)',
                     }}>
                         <Typography>Date</Typography>
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DatePicker label="Basic date picker" />
+                        <LocalizationProvider dateAdapter={AdapterDayjs} >
+                            <DatePicker label="Date" onChange={handleDate} value={date} / >
                         </LocalizationProvider>
 
                         <Typography>Category</Typography>
                         <FormControl fullWidth>
                             <InputLabel>Category</InputLabel>
-                            <Select
-                                value={CATEGORIES}
-                                label="Category"
-                                onChange={handleCat}
-                            >
+                            <Select value={cat} label="Category" onChange={handleCat}>
                                 {
                                     CATEGORIES.map(cat => {
                                         return <MenuItem value={cat}>{cat}</MenuItem>
@@ -100,6 +126,8 @@ const History = (props) => {
                             <OutlinedInput
                                 startAdornment={<InputAdornment position="start">$</InputAdornment>}
                                 label="Amount"
+                                value={amo}
+                                onChange={handleAmo}
                             />
                         </FormControl>
 
@@ -107,7 +135,7 @@ const History = (props) => {
                         <FormControl fullWidth>
                             <InputLabel>Method of Payment</InputLabel>
                             <Select
-                                value={MOP}
+                                value={mop}
                                 label="Method of Payment"
                                 onChange={handleMop}
                             >
@@ -119,10 +147,62 @@ const History = (props) => {
                             </Select>
                         </FormControl>                        
                     </Box>
+
+                    <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 4 }}>
+                        <Button variant="contained">
+                            Submit
+                        </Button>
+                    </Box>
+                </Box>
+            </Modal>
+
+            <Modal
+                open={openFilter}
+                onClose={handleCloseFilter}
+            >
+                <Box sx={style}>
+                    <Typography variant="h6">
+                        Filter
+                    </Typography>
+                   
+                    <Box sx={{
+                        display: 'grid',
+                        gap: 3,
+                        gridTemplateColumns: 'repeat(2, 1fr)',
+                    }}>
+                        <Typography>Category</Typography>
+                        <FormControl fullWidth>
+                            <InputLabel>Category</InputLabel>
+                            <Select
+                                value={fcat}
+                                label="Category"
+                                onChange={filterCat}
+                            >
+                                {
+                                    CATEGORIES.map(c => {
+                                        return <MenuItem value={c}>{c}</MenuItem>
+                                    })
+                                }
+                            </Select>
+                        </FormControl>
+
+                        <Typography>Start Date</Typography>
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <DatePicker label="Start Date" onChange={filterStartDate} value={startDate} />
+                        </LocalizationProvider>
+
+                        <Typography>End Date</Typography>
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <DatePicker label="End Date" onChange={filterEndDate} value={endDate} />
+                        </LocalizationProvider>
                     
-                    <Button>
-                        Submit
-                    </Button>
+                    </Box>
+
+                    <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 4 }}>
+                        <Button variant="contained">
+                            Update
+                        </Button>
+                    </Box>
                 </Box>
             </Modal>
 
