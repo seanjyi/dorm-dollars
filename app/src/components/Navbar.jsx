@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     return (
-        <AppBar sx={{ background: 'purple' }}>
+        <AppBar position="static" sx={{ background: 'purple' }}>
             <Toolbar sx={{mx: 4}}>
                     <Box sx={{ flexGrow: 1, display: 'flex'}}>
                         <Link to="/">
