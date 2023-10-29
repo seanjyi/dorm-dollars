@@ -7,6 +7,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 import { CATEGORIES, MOP } from '../../components/constants';
 import TransactionTable from '../../components/transactionTable';
+import { addTransaction, fetchTransactions } from '../../api/connector';
 
 const History = (props) => {
 
@@ -84,6 +85,32 @@ const History = (props) => {
         p: 4,
     };
 
+    const handleAddSubmit = (e) => {
+        e.preventDefault();
+        let data = {
+            'userid': props.userData.userId,
+            'amount': amo,
+            // 'date': (date.$d.getYear() + 1900) + '-' + (date.$d.getMonth() + 1) + ,
+            'date': date,
+            'category': cat,
+            'method_of_payment': mop
+        }
+
+        addTransaction(data)
+        setAmo('')
+        setDate('')
+        setCat('')
+        setMop('')
+
+        data = {
+            'userid': "" + props.userData.userId,
+            'category': "",
+            'start_date': "",
+            'end_date': ""
+        }
+        fetchTransactions(data, props.setTransactions)
+    }
+
     return (
         <>
             <Box sx={{ display: 'flex', justifyContent: 'flex-end', my: 4 }}> 
@@ -157,7 +184,7 @@ const History = (props) => {
                     </Box>
 
                     <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 4 }}>
-                        <Button variant="contained">
+                        <Button variant="contained" onClick={handleAddSubmit}>
                             Submit
                         </Button>
                     </Box>

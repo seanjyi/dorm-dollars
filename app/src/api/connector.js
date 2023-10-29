@@ -54,3 +54,14 @@ export async function fetchTransactions(data, setTransactions) {
         console.error('Error:', error)
     }
 }
+
+export async function addTransaction(data) {
+    try {
+        const url = apiPath + '/add_transaction'
+        const response = await axios.post(url, data, headers)
+
+        console.log(response)
+    } catch (error) {
+        console.error('Error:', error)
+    }
+}

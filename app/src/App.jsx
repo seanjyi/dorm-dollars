@@ -65,7 +65,7 @@ function App() {
         <div style={{maxWidth: "900px", margin: "auto"}}>
           <Routes>
             <Route path="/" element={<Home loggedIn={loggedIn} userData={userData} transactions={transactions} setTransactions={setTransactions}/>}/>
-            <Route path="/history/" element={<History loggedIn={loggedIn} userData={userData} transactions={transactions}/>}/>
+            <Route path="/history/" element={<History loggedIn={loggedIn} userData={userData} transactions={transactions} setTransactions={setTransactions}/>}/>
             <Route path="/login/" 
               element={
                 <Login
