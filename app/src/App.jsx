@@ -1,11 +1,11 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import History from './routes/history/History'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './routes/home/Home'
 import Login from './routes/login/Login';
-import authenticate from './api/connector';
+import {authenticate, fetchTransactions} from './api/connector';
 import './App.css'
 import Navbar from './components/Navbar';
 
@@ -33,6 +33,19 @@ function App() {
     },
   ])
 
+  useEffect(() => {
+    if (!loggedIn) {
+      return
+    }
+    fetchTransactions(
+      {
+        userid: "" + userData.userId,
+        category: "",
+        start_date: "",
+        end_date: ""
+      }, setTransactions)
+  }, [loggedIn])
+
 
   return (
     <>
@@ -58,20 +71,23 @@ function App() {
       </p> */}
       <BrowserRouter>
         {loggedIn && <Navbar/>}
-        <Routes>
-          <Route path="/" element={<Home loggedIn={loggedIn} userData={userData} transactions={transactions}/>}/>
-          <Route path="/history/" element={<History loggedIn={loggedIn} userData={userData}/>}/>
-          <Route path="/login/" 
-            element={
-              <Login
-                loggedIn={loggedIn}
-                setLoggedIn={setLoggedIn}
-                userData={userData}
-                setUserData={setUserData}
-              />
-            }
-          />
-        </Routes>
+        <div style={{maxWidth: "900px", margin: "auto"}}>
+          <Routes>
+            <Route path="/" element={<Home loggedIn={loggedIn} userData={userData} transactions={transactions}/>}/>
+            <Route path="/history/" element={<History loggedIn={loggedIn} userData={userData}/>}/>
+            <Route path="/login/" 
+              element={
+                <Login
+                  loggedIn={loggedIn}
+                  setLoggedIn={setLoggedIn}
+                  userData={userData}
+                  setUserData={setUserData}
+                />
+              }
+            />
+          </Routes>
+        </div>
+        
       </BrowserRouter>
     </>
   )

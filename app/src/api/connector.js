@@ -21,7 +21,7 @@ const headers = {
  * @param {JSON} userData 
  * @param {function} setUserData 
  */
-async function authenticate(data, setLoggedIn, userData, setUserData) {
+export async function authenticate(data, setLoggedIn, userData, setUserData) {
     try {
         const url = apiPath + '/login'
         const response = await axios.post(url, data, headers)
@@ -42,4 +42,15 @@ async function authenticate(data, setLoggedIn, userData, setUserData) {
     }
 }
 
-export default authenticate;
+export async function fetchTransactions(data, setTransactions) {
+    try {
+        const url = apiPath + '/transactions'
+        const response = await axios.post(url, data, headers)
+
+        setTransactions(response.data)
+        console.log(response.data)
+
+    } catch (error) {
+        console.error('Error:', error)
+    }
+}

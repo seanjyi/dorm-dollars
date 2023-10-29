@@ -2,16 +2,17 @@ import React, { Component, useState } from 'react'
 import { Navigate } from 'react-router-dom';
 import DisplayCard from './cards/Card';
 import Navbar from '../../components/Navbar';
+import TransactionTable from '../../components/transactionTable';
 
 const Home = (props) => {
 
     const { transactions } = props
 
     const [monthlyIncome, setMonthlyIncome] = useState(
-        transactions.reduce((total, curr) => curr.type === "income" ? total + curr.amount : total, 0)
+        transactions.reduce((total, curr) => curr.amount > 0 ? total + curr.amount : total, 0)
     )
     const [monthlyExpenses, setMonthlyExpenses] = useState(
-        transactions.reduce((total, curr) => curr.type === "expense" ? total + curr.amount : total, 0)
+        transactions.reduce((total, curr) => curr.amount < 0 ? total - curr.amount : total, 0)
     )
 
 
@@ -59,6 +60,7 @@ const Home = (props) => {
             <button onClick={incrementExpenses}>
                 Increment Expenses
             </button>
+            <TransactionTable rows={ transactions }/>
         </>
     )
 }

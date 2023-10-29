@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
-import authenticate from '../../api/connector';
+import { authenticate } from '../../api/connector';
 
 
 const Login = (props) => {
