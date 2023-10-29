@@ -61,6 +61,10 @@ const Home = (props) => {
         return <Navigate to="/login" />
     }
 
+    transactions.sort(function(a, b) {
+        return new Date(b.date) - new Date(a.date);
+    })
+
     return (
         <>
             <h1>Welcome, {props.userData.firstName}</h1>
