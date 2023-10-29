@@ -13,6 +13,9 @@ const History = (props) => {
         return <Navigate to="/login" />
     }
 
+    // Add modal vars: date, cat, amo, mop
+    // Filter modal vars: fCat, startDate, endDate
+
     // add modal form
     const [openAdd, setOpenAdd] = React.useState(false);
     const handleOpenAdd = () => setOpenAdd(true);
