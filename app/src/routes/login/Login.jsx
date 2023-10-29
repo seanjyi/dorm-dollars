@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 import { authenticate } from '../../api/connector';
-
+import './login.css'
 
 const Login = (props) => {
     const navigate = useNavigate();
@@ -32,32 +32,34 @@ const Login = (props) => {
     };
 
     return(
-        <div>
-            <h2>Login Form</h2>
-            <form onSubmit={onSubmit}>
-                <label>Username</label>
-                <br />
-                <input
-                    type="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    required
-                />
-                
-                <br /><br />
+        <div id='login'>
+            <div>
+                <h2>Login Form</h2>
+                <form onSubmit={onSubmit}>
+                    <label>Username</label>
+                    <br />
+                    <input
+                        type="text"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        required
+                    />
+                    
+                    <br /><br />
 
-                <label>Password</label>
-                <br />
-                <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
+                    <label>Password</label>
+                    <br />
+                    <input
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
 
-                <br /><br />
-                <button type="submit">Submit</button>
-            </form>
+                    <br /><br />
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
         </div>
     )
 }
