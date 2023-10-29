@@ -58,14 +58,6 @@ const Home = (props) => {
         }
     ]
 
-    const incrementIncome = () => {
-        setMonthlyIncome(prev => prev + 10.73)
-    }
-
-    const incrementExpenses = () => {
-        setMonthlyExpenses(prev => prev + 9.22)
-    }
-
     if (!props.loggedIn) {
         return <Navigate to="/login" />
     }
@@ -77,24 +69,18 @@ const Home = (props) => {
     return (
         <>
             <h1>Welcome, {props.userData.firstName}</h1>
-            <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
+            <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: "30px"}}>
                 {cards.map( card => {
                     return (
                         <DisplayCard title={card.title} value={card.value} />
                     )
                 })}
             </div>
-            <button onClick={incrementIncome}>
-                Increment Income
-            </button>
-            <button onClick={incrementExpenses}>
-                Increment Expenses
-            </button>
             <TransactionTable rows={ transactions.slice(0,5) }/>
             <div id="bar-chart-container" style={{width: "100%", height: "400px", borderRadius: "5px", margin: "30px 0"}} />
             <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
-                <div id="pie-chart-container" style={{width: "45%", borderRadius: "5px"}} />
-                <div id="line-chart-container" style={{width: "45%", borderRadius: "5px"}} />
+                <div id="pie-chart-container" style={{width: "100%", height: "400px", borderRadius: "5px", marginBottom: "50px"}} />
+                {/* <div id="line-chart-container" style={{width: "45%", height: "400px", borderRadius: "5px"}} /> */}
             </div>
         </>
     )
