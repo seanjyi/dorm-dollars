@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import { Navigate } from 'react-router-dom'
-import { Button, Box, Modal, Typography } from '@mui/material';
+import { Button, Box, Modal, Typography, InputLabel, MenuItem, FormControl, Select } from '@mui/material';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+
 
 const History = (props) => {
 
@@ -30,12 +34,12 @@ const History = (props) => {
 
     return (
         <>
-            <Box sx={{  }}> 
+            <Box sx={{ display: 'flex', justifyContent: 'flex-end', my: 4 }}> 
                 <Button variant="contained" onClick={handleOpenAdd}>
                     Add
                 </Button>
 
-                <Button variant="contained">
+                <Button variant="contained" sx={{ ml: 2 }}>
                     Filter
                 </Button>
             </Box>
@@ -49,8 +53,37 @@ const History = (props) => {
                         Add transaction
                     </Typography>
 
-        
+                    <Box sx={{
+                        display: 'grid',
+                        gap: 3,
+                        gridTemplateColumns: 'repeat(2, 1fr)',
+                    }}>
+                        <Typography>Date</Typography>
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <DatePicker label="Basic date picker" />
+                        </LocalizationProvider>
 
+                        <Typography>Category</Typography>
+                        <FormControl fullWidth>
+                            <InputLabel>Age</InputLabel>
+                            <Select
+                                value={age}
+                                label="Age"
+                                onChange={handleChange}
+                            >
+                            <MenuItem value={10}>Ten</MenuItem>
+                            <MenuItem value={20}>Twenty</MenuItem>
+                            <MenuItem value={30}>Thirty</MenuItem>
+                            </Select>
+                        </FormControl>
+
+                        <Typography>Amount</Typography>
+                        <Typography>Method of Payment</Typography>
+                        <Typography>Repayment</Typography>
+
+                        
+                    </Box>
+                    
                     <Button>
                         Submit
                     </Button>
