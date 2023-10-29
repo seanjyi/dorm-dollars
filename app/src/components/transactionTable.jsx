@@ -32,7 +32,6 @@ const TransactionTable = (props) => {
             <TableCell align="right"><b>Date</b></TableCell>
             <TableCell align="right"><b>Amount</b></TableCell>
             <TableCell align="right"><b>Payment Method</b></TableCell>
-            <TableCell align="right"><b>Repayment?</b></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -47,7 +46,6 @@ const TransactionTable = (props) => {
               <TableCell align="right">{row.date}</TableCell>
               <TableCell align="right">{"$" + row.amount.toFixed(2)}</TableCell>
               <TableCell align="right">{row.method_of_payment}</TableCell>
-              <TableCell align="right">{row.repayment}</TableCell>
             </TableRow>
           ))}
         </TableBody>

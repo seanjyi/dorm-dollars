@@ -3,8 +3,8 @@ import { Navigate } from 'react-router-dom';
 import DisplayCard from './cards/Card';
 import Navbar from '../../components/Navbar';
 import TransactionTable from '../../components/transactionTable';
-import { renderBarChart } from '../../components/charts/charts';
-import { CATEGORIES } from '../../components/constants';
+import { renderBarChart, renderPieChart } from '../../components/charts/charts';
+import { CATEGORIES, MOP } from '../../components/constants';
 
 const Home = (props) => {
 
@@ -18,16 +18,25 @@ const Home = (props) => {
     )
 
     useEffect(() => {
+        const totalSpent = transactions.reduce((total, curr) => curr.amount < 0 ? total - curr.amount : total, 0)
         const dataPoints = CATEGORIES.map(category => {
             return {
                 label: category,
                 y: transactions.reduce((total, curr) => curr.amount < 0 && curr.category === category ? total - curr.amount : total, 0)
             }
         })
+        const pieData = MOP.map(method => {
+            return {
+                label: method,
+                y: transactions.reduce((total, curr) => curr.amount < 0 && curr.method_of_payment === method ? total - curr.amount : total, 0) / totalSpent * 100
+            }
+        })
+        console.log(pieData, totalSpent)
         setMonthlyIncome(transactions.reduce((total, curr) => curr.amount > 0 ? total + curr.amount : total, 0))
         setMonthlyExpenses(transactions.reduce((total, curr) => curr.amount < 0 ? total - curr.amount : total, 0))
         try {
             renderBarChart("Spending by Category", dataPoints)
+            renderPieChart("Spending by Payment Method", pieData)
         } catch (error) {
 
         }
@@ -82,11 +91,10 @@ const Home = (props) => {
                 Increment Expenses
             </button>
             <TransactionTable rows={ transactions.slice(0,5) }/>
-            <p>{JSON.stringify(props.userData)}</p>
+            <div id="bar-chart-container" style={{width: "100%", height: "400px", borderRadius: "5px", margin: "30px 0"}} />
             <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
-                <div id="bar-chart-container" style={{width: "100%", borderRadius: "5px"}} />
-                <div id="pie-chart-container" style={{width: "100%", borderRadius: "5px"}} />
-                <div id="line-chart-container" style={{width: "100%", borderRadius: "5px"}} />
+                <div id="pie-chart-container" style={{width: "45%", borderRadius: "5px"}} />
+                <div id="line-chart-container" style={{width: "45%", borderRadius: "5px"}} />
             </div>
         </>
     )
