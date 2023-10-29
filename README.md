@@ -1,5 +1,7 @@
 # Dorm Dollars - budgeting for college
 
+![image](https://github.com/seanjyi/dorm-dollars/assets/80228469/25625a4f-7b7e-4cb8-a809-ef7af4d1c446)
+
 Dorm Dollars is a college/beginner friendly budget planner that highlights useful information about your spending habits.
 
 ![image](https://github.com/seanjyi/dorm-dollars/assets/66392457/dc0962b5-5930-4e1f-b353-f09c0563ba08)
@@ -24,8 +26,7 @@ Our application has three views:
 - A log in page
 - Home page / dashboard
 - Transaction history page
-  
-![image](https://github.com/seanjyi/dorm-dollars/assets/66392457/21aaacb6-7169-4d07-9d30-0fc01f94abd6)
+![image](https://github.com/seanjyi/dorm-dollars/assets/80228469/58e5ab3d-f6e1-498f-a79a-7f91e92ddb9f)
 ![image](https://github.com/seanjyi/dorm-dollars/assets/66392457/0591ac3c-c1f7-4c87-9096-bf8d8ad6da25)
 ![image](https://github.com/seanjyi/dorm-dollars/assets/66392457/dc0962b5-5930-4e1f-b353-f09c0563ba08)
 ![image](https://github.com/seanjyi/dorm-dollars/assets/66392457/47015f7c-6036-4c2b-b7b0-86d6477cd5d2)
