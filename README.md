@@ -10,7 +10,7 @@ Dorm Dollars is a college/beginner friendly budget planner that highlights usefu
 [Eric Li](https://www.linkedin.com/in/ericli0721/), 
 [Sean Yi](https://www.linkedin.com/in/seanjyi/) 
 
-## Planning
+
 
 ### Application architecture
 This full-stack application was built using **React** for the frontend, **Flask** for the backend, and **Google Cloud Postgres** as a database.
