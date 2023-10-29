@@ -21,7 +21,7 @@ const Home = (props) => {
         const dataPoints = CATEGORIES.map(category => {
             return {
                 label: category,
-                y: transactions.reduce((total, curr) => curr.category === category ? total + 1 : total, 0)
+                y: transactions.reduce((total, curr) => curr.amount < 0 && curr.category === category ? total - curr.amount : total, 0)
             }
         })
         setMonthlyIncome(transactions.reduce((total, curr) => curr.amount > 0 ? total + curr.amount : total, 0))
@@ -29,7 +29,7 @@ const Home = (props) => {
         try {
             renderBarChart("Spending by Category", dataPoints)
         } catch (error) {
-            
+
         }
     }, [transactions])
 
@@ -80,7 +80,7 @@ const Home = (props) => {
             <TransactionTable rows={ transactions.slice(0,5) }/>
             <p>{JSON.stringify(props.userData)}</p>
             <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
-                <div id="bar-chart-container" />
+                <div id="bar-chart-container" style={{width: "100%", borderRadius: "5px"}} />
             </div>
         </>
     )
