@@ -63,21 +63,154 @@ def get_transactions():
                         'WHERE userid=%s', userid)
             response = cur.fetchall()
 
-            ret = {}
+            ret = []
             for line in response:
-                ret[line['transactionid']] = {
+                ret.append({
+                    'transactionid': line['transactionid'],
                     'userid': line['userid'],
                     'date': line['date'].strftime("%Y/%m/%d"),
                     'category': line['category'],
                     'amount': float(line['amount']),
                     'method_of_payment': line['method_of_payment'],
                     'repayment': line['repayment'],
-                }
+                })
 
-            return ret
+            return jsonify(ret)
+        elif category == '' and start_date == '' and len(end_date) > 0:
+            cur.execute('SELECT transactionid, userid, "date", category, amount, method_of_payment, repayment '
+                        'FROM public.transactions '
+                        'WHERE userid=%s AND date<=%s', (userid, end_date))
+            response = cur.fetchall()
+
+            ret = []
+            for line in response:
+                ret.append({
+                    'transactionid': line['transactionid'],
+                    'userid': line['userid'],
+                    'date': line['date'].strftime("%Y/%m/%d"),
+                    'category': line['category'],
+                    'amount': float(line['amount']),
+                    'method_of_payment': line['method_of_payment'],
+                    'repayment': line['repayment'],
+                })
+
+            return jsonify(ret)
+        elif category == '' and len(start_date) > 0 and end_date == '':
+            cur.execute('SELECT transactionid, userid, "date", category, amount, method_of_payment, repayment '
+                        'FROM public.transactions '
+                        'WHERE userid=%s AND date>=%s', (userid, start_date))
+            response = cur.fetchall()
+
+            ret = []
+            for line in response:
+                ret.append({
+                    'transactionid': line['transactionid'],
+                    'userid': line['userid'],
+                    'date': line['date'].strftime("%Y/%m/%d"),
+                    'category': line['category'],
+                    'amount': float(line['amount']),
+                    'method_of_payment': line['method_of_payment'],
+                    'repayment': line['repayment'],
+                })
+
+            return jsonify(ret)
+        elif category == '' and len(start_date) > 0 and len(end_date) > 0:
+            cur.execute('SELECT transactionid, userid, "date", category, amount, method_of_payment, repayment '
+                        'FROM public.transactions '
+                        'WHERE userid=%s AND date BETWEEN %s AND %s', (userid, start_date, end_date))
+            response = cur.fetchall()
+
+            ret = []
+            for line in response:
+                ret.append({
+                    'transactionid': line['transactionid'],
+                    'userid': line['userid'],
+                    'date': line['date'].strftime("%Y/%m/%d"),
+                    'category': line['category'],
+                    'amount': float(line['amount']),
+                    'method_of_payment': line['method_of_payment'],
+                    'repayment': line['repayment'],
+                })
+
+            return jsonify(ret)
+        elif len(category) > 0 and start_date == '' and end_date == '':
+            cur.execute('SELECT transactionid, userid, "date", category, amount, method_of_payment, repayment '
+                        'FROM public.transactions '
+                        'WHERE userid=%s AND category=%s', (userid, category))
+            response = cur.fetchall()
+
+            ret = []
+            for line in response:
+                ret.append({
+                    'transactionid': line['transactionid'],
+                    'userid': line['userid'],
+                    'date': line['date'].strftime("%Y/%m/%d"),
+                    'category': line['category'],
+                    'amount': float(line['amount']),
+                    'method_of_payment': line['method_of_payment'],
+                    'repayment': line['repayment'],
+                })
+
+            return jsonify(ret)
         
+        elif len(category) > 0 and start_date == '' and len(end_date) > 0:
+            cur.execute('SELECT transactionid, userid, "date", category, amount, method_of_payment, repayment '
+                        'FROM public.transactions '
+                        'WHERE userid=%s AND category=%s AND date<=%s', (userid, category, end_date))
+            response = cur.fetchall()
 
-    return ""
+            ret = []
+            for line in response:
+                ret.append({
+                    'transactionid': line['transactionid'],
+                    'userid': line['userid'],
+                    'date': line['date'].strftime("%Y/%m/%d"),
+                    'category': line['category'],
+                    'amount': float(line['amount']),
+                    'method_of_payment': line['method_of_payment'],
+                    'repayment': line['repayment'],
+                })
+
+            return jsonify(ret)
+        elif len(category) > 0 and len(start_date) > 0 and end_date == '':
+            cur.execute('SELECT transactionid, userid, "date", category, amount, method_of_payment, repayment '
+                        'FROM public.transactions '
+                        'WHERE userid=%s AND category=%s AND date>=%s', (userid, category, start_date))
+            response = cur.fetchall()
+
+            ret = []
+            for line in response:
+                ret.append({
+                    'transactionid': line['transactionid'],
+                    'userid': line['userid'],
+                    'date': line['date'].strftime("%Y/%m/%d"),
+                    'category': line['category'],
+                    'amount': float(line['amount']),
+                    'method_of_payment': line['method_of_payment'],
+                    'repayment': line['repayment'],
+                })
+
+            return jsonify(ret)
+        else:
+            cur.execute('SELECT transactionid, userid, "date", category, amount, method_of_payment, repayment '
+                        'FROM public.transactions '
+                        'WHERE userid=%s AND category=%s AND date BETWEEN %s AND %s', 
+                        (userid, category, start_date, end_date))
+            response = cur.fetchall()
+
+            ret = []
+            for line in response:
+                ret.append({
+                    'transactionid': line['transactionid'],
+                    'userid': line['userid'],
+                    'date': line['date'].strftime("%Y/%m/%d"),
+                    'category': line['category'],
+                    'amount': float(line['amount']),
+                    'method_of_payment': line['method_of_payment'],
+                    'repayment': line['repayment'],
+                })
+
+            return jsonify(ret)
 
 
 if __name__ == "__main__":
