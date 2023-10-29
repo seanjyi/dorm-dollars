@@ -1,6 +1,6 @@
 # Dorm Dollars - budgeting for college
 
-Dorm Dollars is a college/beginner friendly budget planner that highlights useful information about your spending habits.
+Dorm Dollars is a college/beginner friendly budget planner that highlights useful information about college students' spending habits.
 
 <img src="https://github.com/seanjyi/dorm-dollars/assets/80228469/8eb00561-773a-424e-8105-e20bc05a9c16" width="400">
 
@@ -9,12 +9,13 @@ Dorm Dollars is a college/beginner friendly budget planner that highlights usefu
 [Eric Li](https://www.linkedin.com/in/ericli0721/), 
 [Sean Yi](https://www.linkedin.com/in/seanjyi/) 
 
-
 ### Application architecture
 This full-stack application was built using **React** for the frontend, **Flask** for the backend, and **Google Cloud Postgres** as a database.
 We also used **CanvasJS** to create graphs, and leveraged **Vite** as a build tool.
 
 <img src="/media/app_architecture.png" width="600">
+
+Our planned wireframes, and database schema can be found in [planning.md](planning.md).
 
 ### Frontend
 
@@ -59,12 +60,15 @@ The database utilizes a **PostgreSQL** database, which had 3 tables: Users, Loan
 <img src="https://github.com/seanjyi/dorm-dollars/assets/80228469/3160d7c8-332b-4dda-bab4-539691fd3b0d" width="800">
 <img src="https://github.com/seanjyi/dorm-dollars/assets/80228469/5a8715e0-7dfe-4592-8104-38bc83de4a66" width="800">
 
-<img src="/media/wireframe_struct.png" width="400">  
-<img src="/media/login.png" width="400">  
-<img src="/media/dashboard.jpg" width="400">  
-<img src="/media/history.png" width="400">
-
 ### Reflection
 
-<img src="/media/sql_struct.png" width="500">  
+As this was our first public hackathon, we had a lot of fun planning and working together. Under the time constraint of 25 hours ~~(which is more like 17 hours, hackathons shouldn't promote not sleeping)~~ we have come to build a fully fledged working application. It is impressive to think that we implemented so many things:
 
+- creating the user database on a cloud service
+- login with authentication
+- displaying of user statistics with graphs/cards
+- adding/filtering user database
+
+However despite being able to do so many things, there were still a few ideas we weren't able to do. If you check our [planning mock-up](planning.md), we weren't able to utilize loans nor were we able to show as much user statistics as we planned to. For next time, it would be best keep our ideas smaller to focus on perfecting the important features. 
+
+\- 10/29/2023
