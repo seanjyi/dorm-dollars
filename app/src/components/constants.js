@@ -6,5 +6,15 @@ export const CATEGORIES = [
     'Entertainment',
     'Travel',
     'Shopping',
-    'Transportation'
+    'Transportation',
+    'Other'
+]
+
+export const MOP = [
+    'Cash',
+    'Check / Direct deposit',
+    'Credit card',
+    'Debit card',
+    'Venmo',
+    'Other'
 ]
