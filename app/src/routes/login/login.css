@@ -4,14 +4,19 @@ img {
 }
 
 body {
-    background: purple !important;
+    
 }
 
 #login {
     display: flex;
-    justify-content: 'space-evenly';
+    justify-content: center;
     align-items: center;
     min-height: 100vh;
+    background: purple !important;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left:0;
 }
 
 #login-form {
