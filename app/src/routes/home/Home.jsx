@@ -41,6 +41,7 @@ const Home = (props) => {
         } catch (error) {
 
         }
+
     }, [transactions])
 
 
@@ -62,6 +63,10 @@ const Home = (props) => {
     if (!props.loggedIn) {
         return <Navigate to="/login" />
     }
+
+    transactions.sort(function(a, b) {
+        return new Date(b.date) - new Date(a.date);
+    })
 
     return (
         <>
