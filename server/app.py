@@ -234,7 +234,6 @@ def get_loans():
 def add_transaction():
     if request.method == 'POST':
         params = request.get_json()
-        print(params)
         userid = params['userid']
         category = params['category']
         date = params['date']
@@ -248,6 +247,20 @@ def add_transaction():
         conn.commit()
         return ""
 
+@app.route('/add_loan', methods=['POST'])
+def add_loans():
+    if request.method == 'POST':
+        params = request.get_json()
+        userid = params['userid']
+        loan_name = params['loan_name']
+        amount = params['amount']
+
+        cur.execute('INSERT INTO public.loans '
+                    '(userid, loan_name, amount) '
+                    'VALUES(%s, %s, %s);',
+                    (userid, loan_name, amount))
+        conn.commit()
+        return ""
 
 
 if __name__ == "__main__":
