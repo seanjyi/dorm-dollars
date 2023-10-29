@@ -230,6 +230,25 @@ def get_loans():
 
         return jsonify(ret)
 
+@app.route('/add_transaction', methods=['POST'])
+def add_transaction():
+    if request.method == 'POST':
+        params = request.get_json()
+        print(params)
+        userid = params['userid']
+        category = params['category']
+        date = params['date']
+        amount = params['amount']
+        m_o_p = params['method_of_payment']
+
+        cur.execute('INSERT INTO public.transactions '
+                    '(userid, "date", category, amount, method_of_payment, repayment) '
+                    'VALUES(%s, %s, %s, %s, %s, %s)',
+                    (userid, date, category, amount, m_o_p, ''))
+        conn.commit()
+        return ""
+
+
 
 if __name__ == "__main__":
     app.run(port=5000, debug=True)

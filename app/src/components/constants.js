@@ -12,9 +12,9 @@ export const CATEGORIES = [
 
 export const MOP = [
     'Cash',
-    'Check / Direct deposit',
-    'Credit card',
-    'Debit card',
+    'Check / Direct Deposit',
+    'Credit Card',
+    'Debit Card',
     'Venmo',
     'Other'
 ]
