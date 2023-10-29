@@ -123,6 +123,24 @@ const History = (props) => {
         }
         setLoading(true)
         fetchTransactions(data, props.setTransactions)
+        handleCloseFilter()
+    }
+
+    const handleFilter = (e) => {
+        e.preventDefault()
+        let data = {
+            'userid': "" + props.userData.userId,
+            'category': fCat,
+            'start_date': startDate,
+            'end_date': endDate
+        }
+
+        console.log(data)
+        fetchTransactions(data, props.setTransactions)
+        setFilterCat('')
+        setStartDate('')
+        setEndDate('')
+        handleCloseFilter()
     }
 
     return (
@@ -250,7 +268,7 @@ const History = (props) => {
                     </Box>
 
                     <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 4 }}>
-                        <Button variant="contained">
+                        <Button variant="contained" onClick={handleFilter}>
                             Update
                         </Button>
                     </Box>
