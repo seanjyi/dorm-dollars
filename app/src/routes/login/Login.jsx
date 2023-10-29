@@ -37,7 +37,7 @@ const Login = (props) => {
         <div id='login'>
             <img src={background} />
             <div id='login-form'>
-                <h2>Login Form</h2>
+                <h2>Log in</h2>
                 <form onSubmit={onSubmit}>
                     <label>Username</label>
                     <br />

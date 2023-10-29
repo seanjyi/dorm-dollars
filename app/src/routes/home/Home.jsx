@@ -5,10 +5,11 @@ import Navbar from '../../components/Navbar';
 import TransactionTable from '../../components/transactionTable';
 import { renderBarChart, renderPieChart } from '../../components/charts/charts';
 import { CATEGORIES, MOP } from '../../components/constants';
+import { fetchTransactions } from '../../api/connector';
 
 const Home = (props) => {
 
-    const { transactions, setTransactions } = props
+    const { transactions, setTransactions, userData } = props
 
     const [monthlyIncome, setMonthlyIncome] = useState(
         transactions.reduce((total, curr) => curr.amount > 0 ? total + curr.amount : total, 0)
@@ -16,6 +17,15 @@ const Home = (props) => {
     const [monthlyExpenses, setMonthlyExpenses] = useState(
         transactions.reduce((total, curr) => curr.amount < 0 ? total - curr.amount : total, 0)
     )
+    useEffect(() => {
+        fetchTransactions(
+            {
+              userid: "" + userData.userId,
+              category: "",
+              start_date: "",
+              end_date: ""
+            }, setTransactions)
+    }, [])
 
     useEffect(() => {
         
