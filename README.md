@@ -4,6 +4,8 @@ Dorm Dollars is a college/beginner friendly budget planner that highlights usefu
 
 <img src="https://github.com/seanjyi/dorm-dollars/assets/80228469/8eb00561-773a-424e-8105-e20bc05a9c16" width="400">
 
+[Demo video](https://www.youtube.com/watch?v=8FVldtWtJN0)
+
 ## Team members 
 [Abel Lu](https://www.linkedin.com/in/aluprof4/), 
 [Eric Li](https://www.linkedin.com/in/ericli0721/), 
