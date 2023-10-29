@@ -3,6 +3,8 @@ export const CATEGORIES = [
     'Loan Payment',
     'Housing',
     'Food & Drink',
-    'Recreation',
+    'Entertainment',
+    'Travel',
+    'Shopping',
     'Transportation'
 ]
