@@ -3,23 +3,24 @@ import Typography from '@mui/material/Typography';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     return (
         <AppBar sx={{ background: 'purple' }}>
             <Toolbar sx={{mx: 4}}>
                     <Box sx={{ flexGrow: 1, display: 'flex'}}>
-                        <Button href="/home">
+                        <Link to="/">
                             <Typography variant="h5" sx={{ color: 'white'}}>
                                 Dorm Dollars
                             </Typography>
-                        </Button>
+                        </Link>
 
-                        <Button href="/history" sx={{ textTransform: 'none' }}>
+                        <Link to="/history">
                             <Typography variant="h6" sx={{ ml: 4, color: 'white' }}>
                                 History
                             </Typography>
-                        </Button>
+                        </Link>
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}> 
