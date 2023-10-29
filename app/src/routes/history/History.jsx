@@ -173,11 +173,7 @@ const History = (props) => {
                         <Typography>Category</Typography>
                         <FormControl fullWidth>
                             <InputLabel>Category</InputLabel>
-                            <Select
-                                value={fcat}
-                                label="Category"
-                                onChange={filterCat}
-                            >
+                            <Select value={fCat} label="Category" onChange={filterCat}>
                                 {
                                     CATEGORIES.map(c => {
                                         return <MenuItem value={c}>{c}</MenuItem>
