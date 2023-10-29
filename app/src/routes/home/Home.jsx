@@ -81,6 +81,8 @@ const Home = (props) => {
             <p>{JSON.stringify(props.userData)}</p>
             <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
                 <div id="bar-chart-container" style={{width: "100%", borderRadius: "5px"}} />
+                <div id="pie-chart-container" style={{width: "100%", borderRadius: "5px"}} />
+                <div id="line-chart-container" style={{width: "100%", borderRadius: "5px"}} />
             </div>
         </>
     )
