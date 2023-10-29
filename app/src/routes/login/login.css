@@ -1,6 +1,19 @@
+img {
+    width: 50vw;
+    object-fit: cover;
+}
+
+body {
+    background: purple !important;
+}
+
 #login {
     display: flex;
-    justify-content: center;
+    justify-content: 'space-evenly';
     align-items: center;
     min-height: 100vh;
+}
+
+#login-form {
+    padding-left: 100px;    
 }

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 import { authenticate } from '../../api/connector';
 import './login.css'
+import background from '../../assets/hacknc.svg';
 
 const Login = (props) => {
     const navigate = useNavigate();
@@ -32,8 +33,10 @@ const Login = (props) => {
     };
 
     return(
+        <>
         <div id='login'>
-            <div>
+            <img src={background} />
+            <div id='login-form'>
                 <h2>Login Form</h2>
                 <form onSubmit={onSubmit}>
                     <label>Username</label>
@@ -61,6 +64,7 @@ const Login = (props) => {
                 </form>
             </div>
         </div>
+        </>
     )
 }
 
