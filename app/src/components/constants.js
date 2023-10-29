@@ -1,8 +1,10 @@
-export default CATEGORIES = [
+export const CATEGORIES = [
     'Groceries',
     'Loan Payment',
     'Housing',
     'Food & Drink',
-    'Recreation',
+    'Entertainment',
+    'Travel',
+    'Shopping',
     'Transportation'
 ]
